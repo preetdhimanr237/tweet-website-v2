@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'firstwebsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tweet_n832',
-        'USER': 'tweet_n832_user',
-        'PASSWORD': 'YXtU9MarotdDuVYPMStNN0KRnsVqyI98',
-        'HOST': 'dpg-d958s9rtqb8s73eic57g-a',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
