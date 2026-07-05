@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'firstwebsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'my_db',
+        'NAME': 'tweet_n832',
         'USER': 'tweet_n832_user',
         'PASSWORD': 'YXtU9MarotdDuVYPMStNN0KRnsVqyI98',
         'HOST': 'dpg-d958s9rtqb8s73eic57g-a',
