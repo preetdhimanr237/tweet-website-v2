@@ -1,0 +1,147 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<style>
+body{
+    background: linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+    min-height:100vh;
+}
+
+.register-card{
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(12px);
+    border:none;
+    border-radius:20px;
+    color:white;
+}
+
+.form-control{
+    border-radius:12px;
+    padding:12px;
+}
+
+.form-control:focus{
+    border-color:#0d6efd;
+    box-shadow:0 0 12px rgba(13,110,253,.4);
+}
+
+.btn-register{
+    border-radius:12px;
+    padding:12px;
+    font-size:18px;
+    transition:.3s;
+}
+
+.btn-register:hover{
+    transform:scale(1.03);
+}
+
+.logo{
+    font-size:55px;
+}
+
+a{
+    text-decoration:none;
+}
+</style>
+
+<div class="container">
+
+<div class="row justify-content-center align-items-center" style="min-height:90vh;">
+
+<div class="col-md-6 col-lg-5">
+
+<div class="card shadow-lg register-card">
+
+<div class="card-body p-5">
+
+<div class="text-center mb-4">
+
+<div class="logo">🦅</div>
+
+<h2>Create Account</h2>
+
+<p class="text-light">
+Join our Tweet Community
+</p>
+
+</div>
+
+<form method="POST">
+
+{% csrf_token %}
+<div class="mb-3">
+    <label>First Name</label>
+    {{ form.first_name }}
+</div>
+
+<div class="mb-3">
+    <label>Last Name</label>
+    {{ form.last_name }}
+</div>
+
+<div class="mb-3">
+<label>Username</label>
+{{ form.username }}
+<small>{{ form.username.help_text }}</small>
+</div>
+
+<div class="mb-3">
+<label>Email</label>
+{{ form.email }}
+</div>
+
+<div class="mb-3">
+<label>Password</label>
+{{ form.password1 }}
+<div class="small mt-2">
+{{ form.password1.help_text|safe }}
+</div>
+</div>
+
+<div class="mb-4">
+<label>Confirm Password</label>
+{{ form.password2 }}
+</div>
+
+<div class="d-grid">
+<button class="btn btn-primary btn-register">
+Create Account
+</button>
+</div>
+
+</form>
+
+<hr class="text-light">
+
+<p class="text-center mb-0">
+Already have an account?
+<a class="text-warning fw-bold" href="{% url 'login' %}">
+Login
+</a>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
+{% comment %} {% extends "layout.html" %}
+
+{% block content %}
+<h2>Register form</h2>
+<form  method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-primary">Register</button>
+</form>
+<p>Have an account? <a href="{% url 'register'%}">Login here</a></p>
+
+{% endblock %} {% endcomment %}

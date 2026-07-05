@@ -1,0 +1,236 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+
+        <!-- Cover Image -->
+        <div class="position-relative" >
+
+            <img src="{{ profile.cover_image.url }}"
+                 class="w-100"
+                 style="height:300px;object-fit:cover;">
+
+            <!-- Profile Image -->
+            <img src="{{ profile.profile_image.url }}"
+                 class="rounded-circle border border-5 border-white shadow position-absolute"
+                 style="
+                    width:170px;
+                    height:170px;
+                    object-fit:cover;
+                    left:40px;
+                    bottom:-80px;
+                 ">
+
+        </div>
+
+        <div class="card-body mt-5 pt-5">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                <div>
+
+                    <h2>{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
+
+                    <p>@{{ profile.user.username }}</p>
+
+                    <p class="text-secondary">
+                        {{ profile.user.email }}
+                    </p>
+
+                </div>
+
+                {% if request.user == profile.user %}
+                <a href="{% url 'edit_profile' %}"
+                   class="btn btn-dark rounded-pill px-4">
+                    ✏️ Edit Profile
+                </a>
+                {% endif %}
+
+            </div>
+
+            <hr>
+
+            <!-- Bio -->
+
+            <h5>Bio</h5>
+
+            <p>
+
+                {% if profile.bio %}
+                    {{ profile.bio }}
+                {% else %}
+                    No bio yet.
+                {% endif %}
+
+            </p>
+
+            <!-- Info -->
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <strong>📍 Location</strong>
+
+                    <p>
+
+                        {% if profile.location %}
+                            {{ profile.location }}
+                        {% else %}
+                            Not Added
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <strong>🌐 Website</strong>
+
+                    <p>
+
+                        {% if profile.website %}
+                        <a href="{{ profile.website }}"
+                           target="_blank">
+
+                            {{ profile.website }}
+
+                        </a>
+                        {% else %}
+                            Not Added
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <strong>📅 Joined</strong>
+
+                    <p>
+
+                        {{ profile.user.date_joined|date:"d M Y" }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Stats -->
+
+            <div class="row text-center">
+
+                <div class="col">
+
+                    <h4>{{ tweet_count }}</h4>
+
+                    <small>Tweets</small>
+
+                </div>
+
+                <div class="col">
+
+                    <h4>0</h4>
+
+                    <small>Followers</small>
+
+                </div>
+
+                <div class="col">
+
+                    <h4>0</h4>
+
+                    <small>Following</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Tweets -->
+
+    <div class="mt-5">
+
+        <h3 class="mb-4">
+
+            @{{ profile.user.username }}'s Tweets
+
+        </h3>
+
+        {% for tweet in tweets %}
+
+        <div class="card mb-4 shadow-sm">
+
+            <div class="card-body">
+
+                <div class="d-flex align-items-center mb-3">
+
+                    <img src="{{ profile.profile_image.url }}"
+                         width="50"
+                         height="50"
+                         class="rounded-circle me-3"
+                         style="object-fit:cover;">
+
+                    <div>
+
+                        <strong>
+
+                            {{ tweet.user.username }}
+
+                        </strong>
+
+                        <br>
+
+                        <small class="text-secondary">
+
+                            {{ tweet.created_at }}
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <p class="fs-5">
+
+                    {{ tweet.text }}
+
+                </p>
+
+                {% if tweet.photo %}
+
+                <img src="{{ tweet.photo.url }}"
+                     class="img-fluid rounded">
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="alert alert-info">
+
+            No Tweets Yet.
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

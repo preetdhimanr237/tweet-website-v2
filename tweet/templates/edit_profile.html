@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Edit Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3 class="mb-0">
+                        ✏️ Edit Profile
+                    </h3>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <!-- Current Profile Image -->
+
+                        <div class="text-center mb-4">
+
+                            <img src="{{ form.instance.profile_image.url }}"
+                                 class="rounded-circle border border-3"
+                                 width="150"
+                                 height="150"
+                                 style="object-fit:cover;">
+
+                        </div>
+
+                        <!-- Current Cover Image -->
+
+                        <div class="mb-4">
+
+                            <img src="{{ form.instance.cover_image.url }}"
+                                 class="img-fluid rounded shadow"
+                                 style="height:220px;
+                                        width:100%;
+                                        object-fit:cover;">
+
+                        </div>
+
+                        <!-- Profile Image -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Profile Photo
+                            </label>
+
+                            {{ form.profile_image }}
+
+                        </div>
+
+                        <!-- Cover Image -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Cover Photo
+                            </label>
+
+                            {{ form.cover_image }}
+
+                        </div>
+
+                        <!-- Bio -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Bio
+                            </label>
+
+                            {{ form.bio }}
+
+                        </div>
+
+                        <!-- Location -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Location
+                            </label>
+
+                            {{ form.location }}
+
+                        </div>
+
+                        <!-- Website -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+                                Website
+                            </label>
+
+                            {{ form.website }}
+
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+
+                            <a href="{% url 'profile' %}"
+                               class="btn btn-secondary">
+
+                                Cancel
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-success">
+
+                                💾 Save Changes
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
