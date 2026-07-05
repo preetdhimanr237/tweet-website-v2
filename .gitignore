@@ -1,0 +1,33 @@
+# Virtual Environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# SQLite Database
+db.sqlite3
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Collected static files
+staticfiles/
+
+# User uploads (optional)
+media/
+
+# Windows
+Thumbs.db
+
+# macOS
+.DS_Store
