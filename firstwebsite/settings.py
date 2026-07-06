@@ -153,4 +153,6 @@ LOGIN_URL = '/account/login'
 LOGIN_REDIRECT_URL = '/tweet/'
 LOGOUT_REDIRECT_URL = '/tweet/'
 
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://tweet-website-v2.onrender.com",
+]
