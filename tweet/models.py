@@ -16,17 +16,11 @@ class Tweet(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    profile_image = models.ImageField(
-        upload_to="profile_pics/",
-        default="photos/default.jpg"
-    )
-
-    profile_image = models.ImageField(
-    upload_to="profile_pics/",
-    blank=True,
-    null=True
-    )
-
+    profile_image = models.ImageField(upload_to='profile/', blank=True, null=True)
+    cover_image = models.ImageField(upload_to='cover/', blank=True, null=True)
+   
+    
+   
     bio = models.TextField(blank=True)
 
     location = models.CharField(

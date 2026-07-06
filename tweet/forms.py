@@ -72,6 +72,7 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = [
             "profile_image",
+            "cover_image",
             "bio",
             "location",
             "website",
@@ -98,7 +99,9 @@ class ProfileForm(forms.ModelForm):
             "profile_image": forms.FileInput(attrs={
                 "class": "form-control"
             }),
-
+            "cover_image": forms.FileInput(attrs={
+                "class": "form-control"
+            }),
            
 
         }

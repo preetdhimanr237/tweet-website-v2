@@ -16,12 +16,13 @@ body{
     color: white;
 }
 
-.form-control{
+.login-card input{
     border-radius:12px;
     padding:12px;
+    width:100%;
 }
 
-.form-control:focus{
+.login-card input:focus{
     border-color:#0d6efd;
     box-shadow:0 0 10px rgba(13,110,253,.5);
 }
@@ -30,19 +31,10 @@ body{
     border-radius:12px;
     padding:12px;
     font-size:18px;
-    transition:.3s;
-}
-
-.btn-login:hover{
-    transform:scale(1.03);
 }
 
 .logo{
     font-size:55px;
-}
-
-a{
-    text-decoration:none;
 }
 </style>
 
@@ -57,19 +49,12 @@ a{
                 <div class="card-body p-5">
 
                     <div class="text-center mb-4">
-
                         <div class="logo">🦅</div>
-
                         <h2>Welcome Back</h2>
-
-                        <p class="text-light">
-                            Login to your Tweet account
-                        </p>
-
+                        <p class="text-light">Login to your Tweet account</p>
                     </div>
 
                     <form method="POST">
-
                         {% csrf_token %}
 
                         <div class="mb-3">
@@ -82,8 +67,14 @@ a{
                             {{ form.password }}
                         </div>
 
+                        {% if form.errors %}
+                            <div class="text-danger mb-2">
+                                Invalid username or password
+                            </div>
+                        {% endif %}
+
                         <div class="d-grid">
-                            <button class="btn btn-primary btn-login">
+                            <button type="submit" class="btn btn-primary btn-login">
                                 Login
                             </button>
                         </div>
@@ -110,17 +101,3 @@ a{
 </div>
 
 {% endblock %}
-
-
-{% comment %} {% extends "layout.html" %}
-
-{% block content %}
-<h2>Login form</h2>
-<form  method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button class="btn btn-primary">Register</button>
-</form>
-<p>Don't have an account? <a href="{% url 'register'%}">Register here</a></p>
-
-{% endblock %} {% endcomment %}
