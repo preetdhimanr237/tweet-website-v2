@@ -1,8 +1,10 @@
 from . import views
+from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', views.tweet_list, name='tweet_list'),
 
     path('create/', views.tweet_create, name='tweet_create'),
