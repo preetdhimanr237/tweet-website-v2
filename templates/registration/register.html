@@ -1,3 +1,4 @@
+```html
 {% extends "layout.html" %}
 
 {% block content %}
@@ -71,44 +72,64 @@ Join our Tweet Community
 <form method="POST">
 
 {% csrf_token %}
+
+{% if form.errors %}
+<div class="alert alert-danger">
+
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+        {% for error in field.errors %}
+            <p class="mb-1">
+                <strong>{{ field.label }}:</strong> {{ error }}
+            </p>
+        {% endfor %}
+    {% endfor %}
+
+</div>
+{% endif %}
+
 <div class="mb-3">
-    <label>First Name</label>
+    <label class="form-label">First Name</label>
     {{ form.first_name }}
 </div>
 
 <div class="mb-3">
-    <label>Last Name</label>
+    <label class="form-label">Last Name</label>
     {{ form.last_name }}
 </div>
 
 <div class="mb-3">
-<label>Username</label>
-{{ form.username }}
-<small>{{ form.username.help_text }}</small>
+    <label class="form-label">Username</label>
+    {{ form.username }}
+    <small class="text-light">
+        {{ form.username.help_text }}
+    </small>
 </div>
 
 <div class="mb-3">
-<label>Email</label>
-{{ form.email }}
+    <label class="form-label">Email</label>
+    {{ form.email }}
 </div>
 
 <div class="mb-3">
-<label>Password</label>
-{{ form.password1 }}
-<div class="small mt-2">
-{{ form.password1.help_text|safe }}
-</div>
+    <label class="form-label">Password</label>
+    {{ form.password1 }}
+
+    <div class="small mt-2 text-light">
+        {{ form.password1.help_text|safe }}
+    </div>
 </div>
 
 <div class="mb-4">
-<label>Confirm Password</label>
-{{ form.password2 }}
+    <label class="form-label">Confirm Password</label>
+    {{ form.password2 }}
 </div>
 
 <div class="d-grid">
-<button class="btn btn-primary btn-register">
-Create Account
-</button>
+    <button type="submit" class="btn btn-primary btn-register">
+        Create Account
+    </button>
 </div>
 
 </form>
@@ -117,9 +138,11 @@ Create Account
 
 <p class="text-center mb-0">
 Already have an account?
+
 <a class="text-warning fw-bold" href="{% url 'login' %}">
 Login
 </a>
+
 </p>
 
 </div>
@@ -133,15 +156,4 @@ Login
 </div>
 
 {% endblock %}
-{% comment %} {% extends "layout.html" %}
-
-{% block content %}
-<h2>Register form</h2>
-<form  method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button class="btn btn-primary">Register</button>
-</form>
-<p>Have an account? <a href="{% url 'register'%}">Login here</a></p>
-
-{% endblock %} {% endcomment %}
+```

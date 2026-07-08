@@ -22,22 +22,28 @@ class TweetForm(forms.ModelForm):
 
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField(
-        required=True,
-        widget=forms.EmailInput(attrs={
+
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={
             "class": "form-control"
         })
     )
-    first_name = forms.CharField(
-    widget=forms.TextInput(attrs={"class": "form-control"})
-)
 
     last_name = forms.CharField(
-    widget=forms.TextInput(attrs={"class": "form-control"})
-)
+        widget=forms.TextInput(attrs={
+            "class": "form-control"
+        })
+    )
 
     username = forms.CharField(
         widget=forms.TextInput(attrs={
+            "class": "form-control"
+        })
+    )
+
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={
             "class": "form-control"
         })
     )
@@ -64,6 +70,18 @@ class UserRegistrationForm(UserCreationForm):
             "password1",
             "password2",
         )
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+
+        user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
+        user.email = self.cleaned_data["email"]
+
+        if commit:
+            user.save()
+
+        return user
 
 
 class ProfileForm(forms.ModelForm):
@@ -99,9 +117,9 @@ class ProfileForm(forms.ModelForm):
             "profile_image": forms.FileInput(attrs={
                 "class": "form-control"
             }),
+
             "cover_image": forms.FileInput(attrs={
                 "class": "form-control"
             }),
-           
 
         }
